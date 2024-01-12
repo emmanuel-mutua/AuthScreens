@@ -3,13 +3,10 @@ package com.emmutua.authscreens
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.emmutua.authscreens.ui.theme.AuthScreensTheme
 
 class MainActivity : ComponentActivity() {
@@ -18,13 +15,53 @@ class MainActivity : ComponentActivity() {
         setContent {
             AuthScreensTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-
-                }
+                NavGraph()
             }
         }
     }
 }
 
+@Composable
+fun NavGraph() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "welcome_screen") {
+        composable("welcome_screen") {
+            WelcomeScreen(
+                onLoginButtonClicked = {
+                    navController.navigate("login")
+                },
+                onSignUpButtonClicked = {
+                    navController.navigate("signup")
+                }
+            )
+        }
+        composable("login") {
+            LoginScreen(
+                onLoginButtonClicked = {
+
+                },
+                onSignUpButtonClicked = {
+                    navController.navigate("signup")
+                },
+                onArrowBackClicked = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable("signup") {
+            SignUpScreen(
+                onLoginButtonClicked = {
+                    navController.navigate("login")
+                },
+                onSignUpButtonClicked = {
+
+                },
+                onArrowBackClicked = {
+                    navController.popBackStack()
+                }
+            )
+        }
+    }
+}
 
 

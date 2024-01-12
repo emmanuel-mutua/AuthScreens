@@ -33,7 +33,7 @@ fun WelcomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(10.dp),
+            .padding(15.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround
     ) {
@@ -78,10 +78,10 @@ fun WelcomeScreen(
                 )
             )
             Spacer(modifier = Modifier.height(50.dp))
-            MyFilledButton(text = "Sign In", onClick = onLoginButtonClicked)
+            MyFilledButton(text = "SIGN IN", onClick = onLoginButtonClicked)
             MyOutlinedButton(
                 onClick = onSignUpButtonClicked,
-                text = "Sign Up"
+                text = "SIGN UP"
             )
         }
     }
